@@ -8,6 +8,7 @@
       this.audioWebsocketUrl = options.audioWebsocketUrl;
       this.state = "stopped";
       this.enabled = true;
+      this.micEnabled = true;
       this.volume = 1.0;
       this._wired = false;
       this._pollId = null;
@@ -28,6 +29,12 @@
       global.audioWebsocketUrl = this.audioWebsocketUrl;
 
       this.enabled = String(cfg.isAudioEnabled) !== "false";
+      this.micEnabled =
+        cfg.isMicEnabled !== false &&
+        cfg.isMicEnabled !== 0 &&
+        String(cfg.isMicEnabled).toLowerCase() !== "false" &&
+        String(cfg.isMicEnabled) !== "0";
+      global.browserMicEnabled = this.micEnabled;
       this.volume = Number(cfg.audioVolume ?? 1.0);
 
       try {
@@ -72,6 +79,14 @@
         // no-op
       }
 
+      try {
+        if (typeof global.startBrowserMicCapture === "function") {
+          global.startBrowserMicCapture(this.micEnabled);
+        }
+      } catch (_error) {
+        // no-op
+      }
+
       this._setState("playing");
       this._wireAudioElementEvents();
     }
@@ -80,6 +95,13 @@
       try {
         if (typeof global.stopAudioPlayback === "function") {
           global.stopAudioPlayback();
+        }
+      } catch (_error) {
+        // no-op
+      }
+      try {
+        if (typeof global.stopBrowserMicCapture === "function") {
+          global.stopBrowserMicCapture();
         }
       } catch (_error) {
         // no-op

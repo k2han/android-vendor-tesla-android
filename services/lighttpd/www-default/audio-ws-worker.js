@@ -50,7 +50,7 @@ function scheduleReconnect() {
 }
 
 self.onmessage = (e) => {
-  const { type, url } = e.data || {};
+  const { type, url, buf, text } = e.data || {};
   if (type === "start" && url) {
     want = true;
     currentUrl = url;
@@ -62,5 +62,10 @@ self.onmessage = (e) => {
       try { ws.close(); } catch {}
       ws = null;
     }
+  } else if (type === "send" || type === "sendText") {
+    if (!ws || ws.readyState !== WebSocket.OPEN) return;
+    const data = type === "send" ? buf : text;
+    if (data == null || ws.bufferedAmount + (type === "send" ? data.byteLength : data.length) > 19200) return;
+    try { ws.send(data); } catch {}
   }
 };

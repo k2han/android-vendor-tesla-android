@@ -55,6 +55,9 @@
       this.audioController.applyConfiguration({
         audioWebsocketUrl: this.audioController.audioWebsocketUrl,
         isAudioEnabled: enabled,
+        isMicEnabled: !["0", "false"].includes(
+          String(configuration["persist.tesla-android.browser_mic.is_enabled"] ?? "true").toLowerCase(),
+        ),
         audioVolume: volumeNormalized / 100,
       });
 

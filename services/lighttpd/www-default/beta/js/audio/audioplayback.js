@@ -56,7 +56,13 @@
 
   window.stopAudioPlayback = function () {
     started = false;
+    try { window.stopBrowserMicCapture?.(); } catch {}
     stopAudio();
+  };
+
+  window.sendAudioWebSocket = function(message, transfer) {
+    if (!worker) return;
+    try { worker.postMessage(message, transfer || []); } catch {}
   };
 
   function ensureAudioEl() {
@@ -170,7 +176,9 @@
     worker = new Worker("./js/audio/audio-ws-worker.js");
     worker.onmessage = (e) => {
       const { type } = e.data || {};
-      if (type === 'data') {
+      if (type === 'open') {
+        window.dispatchEvent(new Event('audio-ws-open'));
+      } else if (type === 'data') {
         const ab = e.data.buf;
         if (ab && ab.byteLength) enqueue(new Uint8Array(ab));
         processQueue();
@@ -311,8 +319,8 @@
         artist: 'Live',
         album: 'TeslaAndroid'
       });
-      navigator.mediaSession.setActionHandler('play',  () => { audioEl?.play();  navigator.mediaSession.playbackState = 'playing'; });
-      navigator.mediaSession.setActionHandler('pause', () => { audioEl?.pause(); navigator.mediaSession.playbackState = 'paused';  });
+      navigator.mediaSession.setActionHandler('play',  () => { audioEl?.play(); window.startBrowserMicCapture?.(window.browserMicEnabled !== false); navigator.mediaSession.playbackState = 'playing'; });
+      navigator.mediaSession.setActionHandler('pause', () => { audioEl?.pause(); window.stopBrowserMicCapture?.(); navigator.mediaSession.playbackState = 'paused';  });
       navigator.mediaSession.playbackState = 'playing';
 
       if (mediaRotateTimer) clearInterval(mediaRotateTimer);

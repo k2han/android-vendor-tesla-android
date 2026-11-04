@@ -84,6 +84,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.drm_hwc.headless.config="1088x832@30" \
     persist.tesla-android.browser_audio.is_enabled=0 \
     persist.tesla-android.browser_audio.volume=100 \
+    persist.tesla-android.browser_mic.is_enabled=true \
     persist.tesla-android.virtual-display.is_responsive=0 \
     persist.tesla-android.virtual-display.is_h264=0 \
     persist.tesla-android.gps.is_active=0 \
@@ -222,6 +223,7 @@ PRODUCT_COPY_FILES += \
      $(LOCAL_PATH)/services/lighttpd/www-default/assets/shaders/ink_sparkle.frag:$(TARGET_COPY_OUT_VENDOR)/tesla-android/lighttpd/www-default/assets/shaders/ink_sparkle.frag \
      $(LOCAL_PATH)/services/lighttpd/www-default/audio-ws-worker.js:$(TARGET_COPY_OUT_VENDOR)/tesla-android/lighttpd/www-default/audio-ws-worker.js \
      $(LOCAL_PATH)/services/lighttpd/www-default/audioplayback.js:$(TARGET_COPY_OUT_VENDOR)/tesla-android/lighttpd/www-default/audioplayback.js \
+     $(LOCAL_PATH)/services/lighttpd/www-default/mic-capture.js:$(TARGET_COPY_OUT_VENDOR)/tesla-android/lighttpd/www-default/mic-capture.js \
      $(LOCAL_PATH)/services/lighttpd/www-default/avc.wasm:$(TARGET_COPY_OUT_VENDOR)/tesla-android/lighttpd/www-default/avc.wasm \
      $(LOCAL_PATH)/services/lighttpd/www-default/beta/LICENSE:$(TARGET_COPY_OUT_VENDOR)/tesla-android/lighttpd/www-default/beta/LICENSE \
      $(LOCAL_PATH)/services/lighttpd/www-default/beta/README.md:$(TARGET_COPY_OUT_VENDOR)/tesla-android/lighttpd/www-default/beta/README.md \
@@ -234,6 +236,7 @@ PRODUCT_COPY_FILES += \
      $(LOCAL_PATH)/services/lighttpd/www-default/beta/js/audio/audio-controller.js:$(TARGET_COPY_OUT_VENDOR)/tesla-android/lighttpd/www-default/beta/js/audio/audio-controller.js \
      $(LOCAL_PATH)/services/lighttpd/www-default/beta/js/audio/audio-ws-worker.js:$(TARGET_COPY_OUT_VENDOR)/tesla-android/lighttpd/www-default/beta/js/audio/audio-ws-worker.js \
      $(LOCAL_PATH)/services/lighttpd/www-default/beta/js/audio/audioplayback.js:$(TARGET_COPY_OUT_VENDOR)/tesla-android/lighttpd/www-default/beta/js/audio/audioplayback.js \
+     $(LOCAL_PATH)/services/lighttpd/www-default/beta/js/audio/mic-capture.js:$(TARGET_COPY_OUT_VENDOR)/tesla-android/lighttpd/www-default/beta/js/audio/mic-capture.js \
      $(LOCAL_PATH)/services/lighttpd/www-default/beta/js/core/api-client.js:$(TARGET_COPY_OUT_VENDOR)/tesla-android/lighttpd/www-default/beta/js/core/api-client.js \
      $(LOCAL_PATH)/services/lighttpd/www-default/beta/js/core/app.js:$(TARGET_COPY_OUT_VENDOR)/tesla-android/lighttpd/www-default/beta/js/core/app.js \
      $(LOCAL_PATH)/services/lighttpd/www-default/beta/js/core/shared.js:$(TARGET_COPY_OUT_VENDOR)/tesla-android/lighttpd/www-default/beta/js/core/shared.js \

@@ -62,6 +62,7 @@ service tesla-android-audio-relay /vendor/bin/tesla-android-audio-relay
     user system
     group system
     socket ws_audio stream 0666 system system
+    socket ws_mic stream 0666 system system
     seclabel u:r:audioserver:s0
     disabled
     

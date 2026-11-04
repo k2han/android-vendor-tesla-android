@@ -78599,6 +78599,8 @@ if(g==null)g=1
 f=A.h0(d.i(0,u.y))
 f=f==null?null:B.c.al(f)
 if(f==null)f=100
+e=d.i(0,"persist.tesla-android.browser_mic.is_enabled")
+self.window.__browserMicEnabled=e==null||e===true||e===1||String(e).toLowerCase()==="true"||e==="1"
 d=A.h0(d.i(0,"persist.tesla-android.gps.is_active"))
 d=d==null?null:B.c.al(d)
 if(d==null)d=1
@@ -79475,7 +79477,7 @@ f=B.dF.j(k instanceof A.nN&&k.a)
 e=j instanceof A.iD
 d=B.dF.j(!e||j.a)
 c=l.b
-b=B.b1.F2(A.ah(["audioWebsocketUrl",a0,"displayWebsocketUrl",i,"gpsWebsocketUrl",h,"touchScreenWebsocketUrl",g,"isGPSEnabled",f,"isAudioEnabled",d,"audioVolume",B.c.T(e?j.b/100:1,2),"displayRenderer",p.a.c.aiU(),"displayBinaryType",p.a.c.abS(),"displayWidth",B.c.j(c.a),"displayHeight",B.c.j(c.b)],t.N,t.z),null)
+b=B.b1.F2(A.ah(["audioWebsocketUrl",a0,"displayWebsocketUrl",i,"gpsWebsocketUrl",h,"touchScreenWebsocketUrl",g,"isGPSEnabled",f,"isAudioEnabled",d,"audioVolume",B.c.T(e?j.b/100:1,2),"isMicEnabled",self.window.__browserMicEnabled!==false,"displayRenderer",p.a.c.aiU(),"displayBinaryType",p.a.c.abS(),"displayWidth",B.c.j(c.a),"displayHeight",B.c.j(c.b)],t.N,t.z),null)
 self.window.postMessage(b,"*")
 c=p.d.contentWindow
 if(c!=null)c.postMessage(b,"*")

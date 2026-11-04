@@ -24,6 +24,7 @@
   <meta name="msapplication-TileImage" content="icons/ms-icon-144x144.png" />
   <meta name="theme-color" content="#ffffff" />
   <script src="audioplayback.js"></script>
+  <script src="mic-capture.js"></script>
   <style>
     body {
       inset: 0; overflow: hidden; margin: 0; padding: 0; position: fixed;
@@ -132,12 +133,14 @@ _flutter.buildConfig = {"engineRevision":"82bd5b7209295a5b7ff8cae0df96e7870171e3
       window.startAudioFromGesture = function startAudioFromGesture() {
         try { if (typeof primeAudioFromGesture === 'function') primeAudioFromGesture(); } catch(_){}
         try { if (typeof startAudioPlayback === 'function') startAudioPlayback(); } catch(_){}
+        try { window.startBrowserMicCapture?.(window.browserMicEnabled !== false); } catch(_){}
         setState('playing');
         wireAudioElementEvents();
       };
 
       window.stopAudio = function stopAudio() {
         try { if (typeof stopAudioPlayback === 'function') stopAudioPlayback(); } catch(_){}
+        try { window.stopBrowserMicCapture?.(); } catch(_){}
         setState('stopped');
       };
 
@@ -146,6 +149,7 @@ _flutter.buildConfig = {"engineRevision":"82bd5b7209295a5b7ff8cae0df96e7870171e3
           try {
             const maybe = JSON.parse(e.data);
             if (maybe && typeof maybe === 'object' && 'audioWebsocketUrl' in maybe) {
+              if ('isMicEnabled' in maybe) window.browserMicEnabled = String(maybe.isMicEnabled) !== 'false';
               window.setupAudioConfig(maybe);
             }
           } catch(_) {}
