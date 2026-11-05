@@ -56,3 +56,14 @@ Kernel module `snd-aloop.ko` (`CONFIG_SND_ALOOP=m`):
 
 Copy `deploy.sh` and `prebuilt/*` to `/root/tamic/` on a host with adb to the Pi, then
 `deploy.sh up|status|down`. Everything is bind-mounted, a Pi reboot restores stock.
+
+## prebuilt sha256
+
+```
+239d46a68109b8e167c7a8a166e08fba7efb2670b98deb39f6eff40e73dc0c05  audio.primary.default.aarch64-linux-android34.so
+51e1b6be3834a18009549144bf28dac7cc4486117a29e71cfdb38205dd34cc34  audio.primary.default.armv7a-linux-androideabi34.so
+51e1b6be3834a18009549144bf28dac7cc4486117a29e71cfdb38205dd34cc34  audio.primary.default.so
+abb7fe69a2c1172fcf656ee25eb7c21556f2fb3dfc311f3b4af1567ea2b053c5  mic-capture.js
+6e107388cebeead71534d6e51cdaaf11e6fdfaebfb9c344b534271aedaed818f  snd-aloop.ko
+4c7f8f6b77e9fdb7f1f8856c4d106f6f4bcffe854e2dd6812cc1922fe83824f7  ta-mic-bridge
+```
